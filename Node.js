@@ -50,4 +50,19 @@ export class Node {
 	printNodeRecursive() {
 		this.printNodeRecursiveWhiteLvl(0);
 	}
+
+	createTree(tree, tab) {
+		if (tab.length) {
+			let str = tab[0];
+			tab.shift();
+			if (tree.getChild(str) == null)
+				tree.addChild(str);
+			this.createTree(tree.getChild(str), tab);
+		}
+	}
+
+	writeTree(sentence) {
+		let tab = sentence.split(":");
+		this.createTree(this, tab);
+	}
 }
