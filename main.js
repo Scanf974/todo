@@ -1,28 +1,25 @@
 import {Node} from './Node'
 
+function createTree(tree, tab) {
+	if (tab.length) {
+		let str = tab[0];
+		tab.shift();
+		if (tree.getChild(str) == null)
+			tree.addChild(str);
+		createTree(tree.getChild(str), tab);
+	}
+}
 
-var t = new Node("God");
+function writeTree(tree, sentence) {
+	let tab = sentence.split(":");
+	createTree(tree, tab);
+}
 
-t.addChild("Bruno");
-t.addChild("Manue");
-t.addChild("George");
-t.addChild("Daniel");
-t.childs[2].addChild("Poyer");
-t.childs[0].addChild("Petit");
-t.childs[0].childs[0].addChild("Tres");
-t.childs[0].childs[0].addChild("Trop");
-t.childs[0].childs[0].addChild("Triste");
-t.childs[0].childs[0].childs[1].addChild("Amusant");
+var terre = new Node("Terre");
 
-
-
-var e = new Node("Terre");
-
-e.addChild("Europe").addChild("France").addChild("Lyon");
-e.addChild("Afrique");
-e.addChild("Ameriques").addChild("New York");
-
-e.getChild("Europe").getChild("France").addChild("Bordeaux");
-
-// t.addChild(e);
-e.printNodeRecursive();
+writeTree(terre, "Europe:France:Lyon");
+writeTree(terre, "Europe:France:Bordeaux");
+writeTree(terre, "Afrique:Congo");
+writeTree(terre, "Ameriques:New York");
+writeTree(terre, "Europe:Asie:Chine:Pekin");
+terre.printNodeRecursive();
